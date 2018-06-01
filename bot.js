@@ -4,13 +4,30 @@ var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
-function respond() {
-  var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /^\/cool guy$/;
+let dadTest = (dadString) => {
+  if (dadString.includes("I'm") || dadString.includes("I am")) {
+    return true
+  }
+  return false
+}
 
-  if(request.text && botRegex.test(request.text)) {
+let dadify = (dadString) => {
+  if (dadString.includes("I'm")) {
+    let index = dadString.indexOf("I'm")
+    dadString = dadString.substring(index + 4, dadString.length + 1)
+  } else {
+    let index = dadString.indexOf("I am")
+    dadString = dadString.substring(index + 5, dadString.length + 1)
+  }
+  return ("Hi " + dadString + ", I'm Dad!!")
+}
+
+function respond() {
+  var request = JSON.parse(this.req.chunks[0]);
+
+  if(request.text && dadTest(request.text)) {
     this.res.writeHead(200);
-    postMessage();
+    postMessage(request.text);
     this.res.end();
   } else {
     console.log("don't care");
@@ -19,10 +36,10 @@ function respond() {
   }
 }
 
-function postMessage() {
+function postMessage(userMessage) {
   var botResponse, options, body, botReq;
 
-  botResponse = cool();
+  botResponse = dadify(userMessage);
 
   options = {
     hostname: 'api.groupme.com',
