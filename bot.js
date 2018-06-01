@@ -39,7 +39,7 @@ function respond() {
 function postMessage(userMessage) {
   var botResponse, options, body, botReq;
 
-  botResponse = dadify(userMessage);
+  botResponse = "hello";
 
   options = {
     hostname: 'api.groupme.com',
