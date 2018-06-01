@@ -1,33 +1,15 @@
-// Chris Version
 var HTTPS = require('https');
 var cool = require('cool-ascii-faces');
 
 var botID = process.env.BOT_ID;
 
-let dadTest = (dadString) => {
-  if (dadString.includes("I'm") || dadString.includes("I am")) {
-    return true
-  }
-  return false
-}
-
-let dadify = (dadString) => {
-  if (dadString.includes("I'm")) {
-    let index = dadString.indexOf("I'm")
-    dadString = dadString.substring(index + 4, dadString.length + 1)
-  } else {
-    let index = dadString.indexOf("I am")
-    dadString = dadString.substring(index + 5, dadString.length + 1)
-  }
-  return ("Hi " + dadString + ", I'm Dad!!")
-}
-
 function respond() {
-  var request = JSON.parse(this.req.chunks[0]);
+  var request = JSON.parse(this.req.chunks[0]),
+      botRegex = /^\/cool guy$/;
 
-  if(request.text && dadTest(request.text)) {
+  if(request.text && botRegex.test(request.text)) {
     this.res.writeHead(200);
-    postMessage(request.text);
+    postMessage();
     this.res.end();
   } else {
     console.log("don't care");
@@ -36,10 +18,10 @@ function respond() {
   }
 }
 
-function postMessage(userMessage) {
+function postMessage() {
   var botResponse, options, body, botReq;
 
-  botResponse = "hello";
+  botResponse = cool();
 
   options = {
     hostname: 'api.groupme.com',
