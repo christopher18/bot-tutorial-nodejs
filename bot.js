@@ -25,7 +25,7 @@ let dadify = (dadString) => {
 function respond() {
   var request = JSON.parse(this.req.chunks[0]);
 
-  if(request.text ) {
+  if(request.text && dadTest(request.text)) {
     this.res.writeHead(200);
     postMessage(request.text);
     this.res.end();
