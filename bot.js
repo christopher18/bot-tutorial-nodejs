@@ -7,7 +7,7 @@ function respond() {
   var request = JSON.parse(this.req.chunks[0]),
       botRegex = /(I am)+|(I'm)+/i;
 
-  if(request.text && botRegex.test(request.text) && (request.user_id).toString() != 642954.toString()) {
+  if(request.text && botRegex.test(request.text) && request.user_id != "642954") {
     this.res.writeHead(200);
     postMessage(request.user_id);
     this.res.end();
