@@ -8,7 +8,7 @@ function respond() {
       botRegex = /(I[^abcdefghijklmnopqrstuvwxyz]m)+|(I am)+/i;
 
   if(request.text && botRegex.test(request.text) && request.user_id != "642954") {
-    let message = request.text
+    let message = request.text.toString()
     message = message.replace(/(.)*I am /i,"Hi ")
     .replace(/([\.,!:()])+/,"");
     message = message + ", I'm DadBot!!"
