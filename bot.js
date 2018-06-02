@@ -5,7 +5,7 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
-      botRegex = /(I[^abcdefghijklmnopqrstuvwxyz]m)+/i;
+      botRegex = /(I[^abcdefghijklmnopqrstuvwxyz]m)+|(I am)+/i;
 
   if(request.text && botRegex.test(request.text) && request.user_id != "642954") {
     this.res.writeHead(200);
