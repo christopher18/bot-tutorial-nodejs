@@ -8,8 +8,12 @@ function respond() {
       botRegex = /(I[^abcdefghijklmnopqrstuvwxyz]m)+|(I am)+/i;
 
   if(request.text && botRegex.test(request.text) && request.user_id != "642954") {
+    let message = request.text
+    message = message.replace(/(.)*I am /i,"Hi ")
+    .replace(/([\.,!:()])+/,"");
+    message = message + ", I'm DadBot!!"
     this.res.writeHead(200);
-    postMessage(request.user_id);
+    postMessage(message);
     this.res.end();
   } else {
     console.log("don't care");
@@ -21,7 +25,7 @@ function respond() {
 function postMessage(message) {
   var botResponse, options, body, botReq;
 
-  botResponse = "I am" + message;
+  botResponse = message;
 
   options = {
     hostname: 'api.groupme.com',
